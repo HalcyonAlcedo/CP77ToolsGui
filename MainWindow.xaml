@@ -23,7 +23,7 @@
             <RowDefinition Height="22*"/>
             <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="DoArchive_Button" Content="解包" Margin="32,22,0,0" Style="{StaticResource ButtonPrimary}" Click="ArchiveFile" Width="152" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button x:Name="DoArchive_Button" Content="{DynamicResource 解包}" Margin="32,22,0,0" Style="{StaticResource ButtonPrimary}" Click="ArchiveFile" Width="152" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -31,7 +31,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="DoDump_Button" Content="获取包信息" Margin="32,67,0,0" Style="{StaticResource ButtonPrimary}" Click="DumpFile" Width="152" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button x:Name="DoPack_Button" Content="{DynamicResource 打包}" Margin="32,67,0,0" Style="{StaticResource ButtonPrimary}" Click="PackFile" Width="152" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -39,16 +39,24 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <hc:ComboBox x:Name="Texture" IsEditable="False" hc:InfoElement.TitleWidth="60" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="提取纹理" Margin="209,24,357,148" Background="#99FFFFFF">
-            <ListBoxItem Content="全部提取"/>
+        <Button x:Name="DoDump_Button" Content="{DynamicResource 获取包信息}" Margin="205,22,0,0" Style="{StaticResource ButtonPrimary}" Click="DumpFile" Width="90" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
+                    <GradientStop Color="#CC326CF3" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <hc:ComboBox x:Name="Texture" IsEditable="False" hc:InfoElement.TitleWidth="60" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{DynamicResource 提取纹理}" Margin="300,24,357,148" Background="#99FFFFFF">
+            <ListBoxItem Content="All"/>
             <ListBoxItem Content="tga"/>
             <ListBoxItem Content="jpg"/>
             <ListBoxItem Content="png"/>
             <ListBoxItem Content="dds"/>
             <ListBoxItem Content="bmp"/>
         </hc:ComboBox>
-        <hc:TextBox x:Name="outFilePath" hc:InfoElement.TitleWidth="auto" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="保存目录" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,22,104,0" MouseDoubleClick="SavePathClick" Background="#99FFFFFF" HorizontalAlignment="Right" Width="232" Height="30" VerticalAlignment="Top"/>
-        <Button Content="选择" Margin="0,22,26,0" Style="{StaticResource ButtonPrimary}" Click="SavePathClick" Width="65" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <hc:TextBox x:Name="outFilePath" hc:InfoElement.TitleWidth="auto" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{DynamicResource 保存目录}" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,22,104,0" MouseDoubleClick="SavePathClick" Background="#99FFFFFF" HorizontalAlignment="Right" Width="232" Height="30" VerticalAlignment="Top"/>
+        <Button Content="{DynamicResource 选择}" Margin="0,22,26,0" Style="{StaticResource ButtonPrimary}" Click="SavePathClick" Width="65" VerticalAlignment="Top" HorizontalAlignment="Right">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -56,8 +64,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <hc:TextBox x:Name="ScreenFile" hc:InfoElement.TitleWidth="auto" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="筛选文件" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,67,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="232" Height="30" VerticalAlignment="Top"/>
-        <Button x:Name="DoUpdateTools_Button" Content="下载/更新CP77Tools" Margin="0,67,357,0" Style="{StaticResource ButtonPrimary}" Click="UpdateToolsClick" Width="234" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <hc:TextBox x:Name="ScreenFile" hc:InfoElement.TitleWidth="auto" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{DynamicResource 筛选文件}" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,67,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="232" Height="30" VerticalAlignment="Top"/>
+        <Button x:Name="DoUpdateTools_Button" Content="{DynamicResource 更新工具}" Margin="0,67,357,0" Style="{StaticResource ButtonPrimary}" Click="UpdateToolsClick" Width="238" VerticalAlignment="Top" HorizontalAlignment="Right">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -75,13 +83,13 @@
                     <Run Text="-------------------------------------------------------------------------------------------------------------------------------------------------"/>
                 </Paragraph>
                 <Paragraph NumberSubstitution.CultureSource="User" Foreground="Black">
-                    <Run Text="软件需要安装NET5.0，如果你还未安装，可以在 https://dotnet.microsoft.com/download/dotnet/5.0 下载"/>
+                    <Run Text="{DynamicResource net提示}"/>
                 </Paragraph>
                 <Paragraph NumberSubstitution.CultureSource="User" Foreground="Black">
-                    <Run Text="软件所需的oo2ext_7_win64.dll文件可以在Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll中找到"/>
+                    <Run Text="{DynamicResource dll提示}"/>
                 </Paragraph>
                 <Paragraph NumberSubstitution.CultureSource="User" Foreground="Black">
-                    <Run Text="筛选文件使用通配符形式进行筛选"/>
+                    <Run Text="{DynamicResource 筛选提示}"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
@@ -95,9 +103,9 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <StackPanel hc:Growl.Token="ErrorMessage" VerticalAlignment="Top" Margin="0,10,10,10" SizeChanged="StackPanel_SizeChanged"/>
         </ScrollViewer>
-        <hc:LoadingCircle x:Name="executionLoading" Margin="709,57,43,108" Visibility="Hidden"/>
-        <hc:TextBox x:Name="ArgumentsText" hc:TitleElement.TitleWidth="auto" hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="运行参数" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,147,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="678" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button x:Name="DoRun_Button" Content="执行" Margin="701,147,0,0" Style="{StaticResource ButtonPrimary}" Click="ExecuteClick" Width="65" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1">
+        <hc:LoadingCircle x:Name="executionLoading" Margin="720,63,32,102" Visibility="Hidden"/>
+        <hc:TextBox x:Name="ArgumentsText" hc:TitleElement.TitleWidth="auto" hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{DynamicResource 运行参数}" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,147,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="678" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button x:Name="DoRun_Button" Content="{DynamicResource 执行}" Margin="701,147,0,0" Style="{StaticResource ButtonPrimary}" Click="ExecuteClick" Width="65" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -107,8 +115,11 @@
         </Button>
         <TextBlock HorizontalAlignment="Left" Margin="10,194,0,0" Grid.Row="1" TextWrapping="Wrap" Text="CP77 Tools" VerticalAlignment="Top" Width="69" MouseLeftButtonDown="cp77_MouseLeftButtonDown"/>
         <hc:Divider HorizontalAlignment="Left" Height="15" Margin="79,194,0,0" Grid.Row="1" VerticalAlignment="Top" Width="12" LineStroke="#FF0F60F0" Orientation="Vertical"/>
-        <TextBlock HorizontalAlignment="Left" Margin="141,194,0,-10" Grid.Row="1" TextWrapping="Wrap" Text="我的主页" VerticalAlignment="Top" Width="50" MouseLeftButtonDown="my_MouseLeftButtonDown"/>
-        <hc:Divider HorizontalAlignment="Left" Height="15" Margin="129,194,0,0" Grid.Row="1" VerticalAlignment="Top" Width="12" LineStroke="#FF0F60F0" Orientation="Vertical"/>
-        <TextBlock HorizontalAlignment="Left" Margin="91,194,0,0" Grid.Row="1" TextWrapping="Wrap" Text="采蘑菇" VerticalAlignment="Top" Width="38" MouseLeftButtonDown="caimogu_MouseLeftButtonDown"/>
+        <TextBlock HorizontalAlignment="Left" Margin="152,194,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{DynamicResource 我的主页}" VerticalAlignment="Top" Width="50" MouseLeftButtonDown="my_MouseLeftButtonDown"/>
+        <hc:Divider HorizontalAlignment="Left" Height="15" Margin="140,194,0,0" Grid.Row="1" VerticalAlignment="Top" Width="12" LineStroke="#FF0F60F0" Orientation="Vertical"/>
+        <TextBlock HorizontalAlignment="Left" Margin="91,194,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{DynamicResource 踩蘑菇}" VerticalAlignment="Top" Width="38" MouseLeftButtonDown="caimogu_MouseLeftButtonDown"/>
+        <TextBlock HorizontalAlignment="Left" Margin="217,194,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{DynamicResource qq群}" VerticalAlignment="Top" Width="124"/>
+        <TextBlock HorizontalAlignment="Left" Margin="735,194,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{DynamicResource 语言切换}" VerticalAlignment="Top" Width="50" MouseLeftButtonDown="LanguageSwitch"/>
+        <hc:Divider HorizontalAlignment="Left" Height="15" Margin="207,194,0,0" Grid.Row="1" VerticalAlignment="Top" Width="12" LineStroke="#FF0F60F0" Orientation="Vertical"/>
     </Grid>
 </hc:Window>

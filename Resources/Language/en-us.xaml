@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="语言切换">中文</system:String>
+    <system:String x:Key="解包">Extract</system:String>
+    <system:String x:Key="打包">Pack</system:String>
+    <system:String x:Key="获取包信息">Dump</system:String>
+    <system:String x:Key="提取纹理">Texture</system:String>
+    <system:String x:Key="保存目录">SaveDirectory</system:String>
+    <system:String x:Key="选择">Select</system:String>
+    <system:String x:Key="筛选文件">Filter</system:String>
+    <system:String x:Key="更新工具">Update/Download CP77Tools</system:String>
+    <system:String x:Key="运行参数">Parameters</system:String>
+    <system:String x:Key="执行">Run</system:String>
+    <system:String x:Key="我的主页">Alcedo</system:String>
+    <system:String x:Key="踩蘑菇">Caimogu.net</system:String>
+    <system:String x:Key="net提示">Make sure you have .NET Runtime 5.0.1 installed.You can find it here: https://dotnet.microsoft.com/download/dotnet/5.0</system:String>
+    <system:String x:Key="dll提示">The cp77 tools require the oo2ext_7_win64.dll to work. Copy and paste the dll into the cp77Tools folder.It can be found here:Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll</system:String>
+    <system:String x:Key="筛选提示">Filter files are filtered in the form of wildcards</system:String>
+    <system:String x:Key="qq群">QQ:602068746</system:String>
+    
+</ResourceDictionary>
