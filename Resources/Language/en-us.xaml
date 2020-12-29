@@ -4,19 +4,43 @@
     <system:String x:Key="语言切换">中文</system:String>
     <system:String x:Key="解包">Extract</system:String>
     <system:String x:Key="打包">Pack</system:String>
-    <system:String x:Key="获取包信息">Dump</system:String>
+    <system:String x:Key="获取包信息">Preview</system:String>
     <system:String x:Key="提取纹理">Texture</system:String>
     <system:String x:Key="保存目录">SaveDirectory</system:String>
     <system:String x:Key="选择">Select</system:String>
     <system:String x:Key="筛选文件">Filter</system:String>
     <system:String x:Key="更新工具">Update/Download CP77Tools</system:String>
+    <system:String x:Key="设置">Setting</system:String>
+    <system:String x:Key="创建目录">Creating a directory for unpacking files</system:String>
+    <system:String x:Key="仅参数">Only build parameters are not executed immediately</system:String>
+    <system:String x:Key="显示cmd">Display cp77tools window</system:String>
+    <system:String x:Key="更新程序">Update Tools</system:String>
     <system:String x:Key="运行参数">Parameters</system:String>
     <system:String x:Key="执行">Run</system:String>
     <system:String x:Key="我的主页">Alcedo</system:String>
-    <system:String x:Key="踩蘑菇">Caimogu.net</system:String>
+    <system:String x:Key="踩蘑菇">Caimogu</system:String>
     <system:String x:Key="net提示">Make sure you have .NET Runtime 5.0.1 installed.You can find it here: https://dotnet.microsoft.com/download/dotnet/5.0</system:String>
     <system:String x:Key="dll提示">The cp77 tools require the oo2ext_7_win64.dll to work. Copy and paste the dll into the cp77Tools folder.It can be found here:Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll</system:String>
     <system:String x:Key="筛选提示">Filter files are filtered in the form of wildcards</system:String>
     <system:String x:Key="qq群">QQ:602068746</system:String>
+
+    <system:String x:Key="c_发现工具更新">A new version of cp77tools has been found. You can choose to update it.</system:String>
+    <system:String x:Key="c_获取更新">Get tool update information!</system:String>
+    <system:String x:Key="c_包信息保存目录提示">The extracted package information will be saved in the directory where the package file is located</system:String>
+    <system:String x:Key="c_开始执行操作">Start the operation, the execution time is long, please do not close the program!</system:String>
+    <system:String x:Key="c_操作完成">Operation complete!</system:String>
+    <system:String x:Key="c_未找到CP77Tools">Error: cp77tools not found!</system:String>
+    <system:String x:Key="c_未找到dll">Error: please copy oo2ext_7_win64.dll file to cp77tools folder!</system:String>
+    <system:String x:Key="c_未安装net">Error: please install. Net5.0 first!</system:String>
+    <system:String x:Key="c_无更新上">The latest version is currently installed(</system:String>
+    <system:String x:Key="c_无更新下">),If you need to re install, please delete the ToolsVersion file and try again!</system:String>
+    <system:String x:Key="c_下载中">Downloading, please wait...</system:String>
+    <system:String x:Key="c_下载进度上">Currently, </system:String>
+    <system:String x:Key="c_下载进度中"> bytes are received, and the file size is </system:String>
+    <system:String x:Key="c_下载进度下"> bytes in total</system:String>
+    <system:String x:Key="c_下载取消">File download cancelled!</system:String>
+    <system:String x:Key="c_下载成功">The file is downloaded successfully. Begin to unzip.</system:String>
+    <system:String x:Key="c_更新完成">Update complete.</system:String>
+    <system:String x:Key="c_更新失败">Update failed!</system:String>
     
 </ResourceDictionary>

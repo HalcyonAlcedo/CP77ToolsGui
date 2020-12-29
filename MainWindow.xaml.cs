@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using AutoUpdaterDotNET;
 
 namespace CP77ToolsGui
 {
@@ -33,6 +34,7 @@ namespace CP77ToolsGui
             get { return _blurOpacity; }
             set { _blurOpacity = (uint)value; EnableBlur(); }
         }
+
         private uint _blurBackgroundColor = 0x990000; /* BGR color format */
         private string _currentLan = string.Empty;
 
@@ -41,6 +43,12 @@ namespace CP77ToolsGui
             InitializeComponent();
             Init();
             _currentLan = "zh-cn";
+        }
+        private static Window GetActiveWindow() => Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+
+        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            EnableBlur();
             string url = "https://api.github.com/repos/WolvenKit/CP77Tools/releases";
             string getJson = HttpUitls.Get(url);
             JArray ret = (JArray)JsonConvert.DeserializeObject(getJson);
@@ -49,13 +57,16 @@ namespace CP77ToolsGui
             string versionInfo = githubInfo["tag_name"].ToString();
             string downloadUrl = githubInfo["assets"][0]["browser_download_url"].ToString();
 
+            AutoUpdater.Start("http://kit.alcedo.top/AutoUpdater.xml");
+
             try
             {
                 if (File.Exists("ToolsVersion"))
                 {
                     if (File.ReadAllText("ToolsVersion") != versionInfo)
                     {
-                        HandyControl.Controls.Growl.Warning("发现新版本CP77Tools，可选择更新", "InfoMessage");
+
+                        HandyControl.Controls.Growl.Warning(Application.Current.FindResource("c_发现工具更新").ToString(), "InfoMessage");
                     }
                 }
             }
@@ -63,12 +74,6 @@ namespace CP77ToolsGui
             {
                 consoleBox.Inlines.Add(new Run(ex.Message + "\r\n"));
             }
-        }
-        private static Window GetActiveWindow() => Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-
-        private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
-        {
-            EnableBlur();
         }
         private void EnableBlur()
         {
@@ -118,9 +123,7 @@ namespace CP77ToolsGui
                     if (File.Exists(dropPath))
                     {
                         string filepath = dropPath;
-                        string filename = Path.GetFileNameWithoutExtension(dropPath);
-                        string fileextension = System.IO.Path.GetExtension(filepath);
-                        DoArchive(filepath, filename, fileextension);
+                        DoArchive(filepath);
                     }
                     else if (Directory.Exists(dropPath))
                     {
@@ -129,9 +132,7 @@ namespace CP77ToolsGui
                         for (int i = 0; i < fl.Count; i++)
                         {
                             string filepath = fl[i];
-                            string filename = Path.GetFileNameWithoutExtension(fl[i]);
-                            string fileextension = System.IO.Path.GetExtension(filepath);
-                            DoArchive(filepath, filename, fileextension);
+                            DoArchive(filepath);
                         }
                     }
                 }
@@ -146,9 +147,7 @@ namespace CP77ToolsGui
             if (result == true)
             {
                 string filepath = dlg.FileName;
-                string filename = Path.GetFileNameWithoutExtension(dlg.SafeFileName);
-                string fileextension = System.IO.Path.GetExtension(filepath);
-                DoArchive(filepath, filename, fileextension);
+                DoArchive(filepath);
             }
         }
         private void DumpFile(object sender, RoutedEventArgs e)
@@ -159,9 +158,8 @@ namespace CP77ToolsGui
             if (result == true)
             {
                 string filepath = dlg.FileName;
-                string filename = Path.GetFileNameWithoutExtension(dlg.SafeFileName);
-                string fileextension = System.IO.Path.GetExtension(filepath);
-                DoDump(filepath, filename, fileextension);
+                //DoDump(filepath);
+                DoGetPacketList(filepath);
             }
         }
         private void Cr2wFile(object sender, RoutedEventArgs e)
@@ -172,9 +170,7 @@ namespace CP77ToolsGui
             if (result == true)
             {
                 string filepath = dlg.FileName;
-                string filename = Path.GetFileNameWithoutExtension(dlg.SafeFileName);
-                string fileextension = System.IO.Path.GetExtension(filepath);
-                DoCr2w(filepath, filename, fileextension);
+                DoCr2w(filepath);
             }
         }
         private void PackFile(object sender, RoutedEventArgs e)
@@ -210,43 +206,50 @@ namespace CP77ToolsGui
             return FileList;
         }
 
-        private void DoArchive(string filepath, string filename, string fileextension)
+        private void DoArchive(string filepath)
         {
             if(outFilePath.Text != "")
-                ArgumentsText.Text = "archive -o \"" + outFilePath.Text + "\" -p \"" + filepath + "\" ";
+            {
+                if (CreateDirectory.IsChecked == true)
+                    ArgumentsText.Text = "archive -o \"" + outFilePath.Text + "\\" + Path.GetFileNameWithoutExtension(filepath)  + "\" -p \"" + filepath + "\" ";
+                else
+                    ArgumentsText.Text = "archive -o \"" + outFilePath.Text + "\" -p \"" + filepath + "\" ";
+            }
             else
                 ArgumentsText.Text = "archive -p \"" + filepath + "\" ";
 
-            if(ScreenFile.Text != "")
+            if (ScreenFile.Text != "")
             {
                 ArgumentsText.Text += "-e -w " + ScreenFile.Text + " ";
             }
             else
+                ArgumentsText.Text += "-e ";
+
+            if (Texture.SelectedItem != null && Texture.SelectedIndex >= 1)
             {
-                if (Texture.SelectedItem != null && Texture.SelectionBoxItem != "全部提取")
-                {
-                    ArgumentsText.Text += "-u --uext " + Texture.SelectionBoxItem + " ";
-                } else
-                    ArgumentsText.Text += "-e ";
+                ArgumentsText.Text += "-u --uext " + Texture.SelectionBoxItem + " ";
             }
 
-            PerformUnpack(ArgumentsText.Text);
+            if (ParametersOnly.IsChecked == false)
+                PerformUnpack(ArgumentsText.Text);
         }
 
-        private void DoDump(string filepath, string filename, string fileextension)
+        private void DoDump(string filepath)
         {
             ArgumentsText.Text = "dump -i -p \"" + filepath + "\" ";
-            consoleBox.Inlines.Add(new Run("提取的包信息将保存在包文件所在目录 \r\n"));
-            PerformUnpack(ArgumentsText.Text);
+            consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_包信息保存目录提示").ToString() + "\r\n"));
+            if (ParametersOnly.IsChecked == false)
+                PerformUnpack(ArgumentsText.Text);
         }
-        private void DoCr2w(string filepath, string filename, string fileextension)
+        private void DoCr2w(string filepath)
         {
             if (outFilePath.Text != "")
                 ArgumentsText.Text = "cr2w -i -o \"" + outFilePath.Text + "\" -p \"" + filepath + "\" ";
             else
                 ArgumentsText.Text = "cr2w -i -p \"" + filepath + "\" ";
 
-            PerformUnpack(ArgumentsText.Text);
+            if (ParametersOnly.IsChecked == false)
+                PerformUnpack(ArgumentsText.Text);
         }
         private void DoPack(string filepath)
         {
@@ -255,9 +258,38 @@ namespace CP77ToolsGui
             else
                 ArgumentsText.Text = "pack -p \"" + filepath + "\" ";
 
-            PerformUnpack(ArgumentsText.Text);
+            if (ParametersOnly.IsChecked == false)
+                PerformUnpack(ArgumentsText.Text);
         }
-        
+        private void DoGetPacketList(string filepath)
+        {
+            PacketList PacketList = new PacketList(filepath);
+            PacketList.Show();
+            PacketList.SxEvent += PacketList_SxEvent;
+        }
+        private void PacketList_SxEvent(string leIn, string filepath)
+        {
+            if (outFilePath.Text != "")
+            {
+                if (CreateDirectory.IsChecked == true)
+                    ArgumentsText.Text = "archive -o \"" + outFilePath.Text + "\\" + Path.GetFileNameWithoutExtension(filepath) + "\" -p \"" + filepath + "\" ";
+                else
+                    ArgumentsText.Text = "archive -o \"" + outFilePath.Text + "\" -p \"" + filepath + "\" ";
+            }
+            else
+                ArgumentsText.Text = "archive -p \"" + filepath + "\" ";
+
+            ArgumentsText.Text += "-e " + leIn + " ";
+
+
+            if (Texture.SelectedItem != null && Texture.SelectedIndex >= 1)
+            {
+                ArgumentsText.Text += "-u --uext " + Texture.SelectionBoxItem + " ";
+            }
+
+            if (ParametersOnly.IsChecked == false)
+                PerformUnpack(ArgumentsText.Text);
+        }
         private void SavePathClick(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -273,17 +305,24 @@ namespace CP77ToolsGui
             consoleBox.Inlines.Clear();
             if (!File.Exists("CP77Tools/CP77Tools.exe"))
             {
-                consoleBox.Inlines.Add(new Run() { Text = "错误：未找到CP77Tools！" + "\r\n", Foreground = new SolidColorBrush(Colors.Red) });
+                consoleBox.Inlines.Add(new Run() { Text = Application.Current.FindResource("c_未找到CP77Tools").ToString() + "\r\n", Foreground = new SolidColorBrush(Colors.Red) });
                 return;
             }
             if (!File.Exists("CP77Tools/oo2ext_7_win64.dll"))
             {
-                consoleBox.Inlines.Add(new Run() { Text = "错误：请将oo2ext_7_win64.dll文件复制到CP77Tools文件夹中！" + "\r\n", Foreground = new SolidColorBrush(Colors.Red)});
+                consoleBox.Inlines.Add(new Run() { Text = Application.Current.FindResource("c_未找到dll").ToString() + "\r\n", Foreground = new SolidColorBrush(Colors.Red)});
                 return;
             }
+            /*
+            if (!File.Exists("CP77Tools/Resources/archivehashes.csv"))
+            {
+                consoleBox.Inlines.Add(new Run() { Text = "错误：未找到archivehashes.csv文件，可能是由于当前CP77tools版本问题，您可以从https://raw.githubusercontent.com/WolvenKit/CP77Tools/main/CP77Tools/Resources/archivehashes.zip手动下载后复制到CP77Tools/Resources/文件夹中。" + "\r\n", Foreground = new SolidColorBrush(Colors.Red) });
+                return;
+            }
+            */
             if (!GetDotNetRelease(5))
             {
-                consoleBox.Inlines.Add(new Run() { Text = "错误：请先安装.NET5.0！" + "\r\n", Foreground = new SolidColorBrush(Colors.Red)});
+                consoleBox.Inlines.Add(new Run() { Text = Application.Current.FindResource("c_未安装net").ToString() + "\r\n", Foreground = new SolidColorBrush(Colors.Red)});
                 return;
             }
             executionLoading.Visibility = Visibility.Visible;
@@ -293,21 +332,22 @@ namespace CP77ToolsGui
             DoDump_Button.IsEnabled = false;
             DoPack_Button.IsEnabled = false;
             string Arguments = StartFileArg;
-            consoleBox.Inlines.Add(new Run("开始执行操作，执行时间较长，请不要关闭程序！ \r\n"));
+            consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_开始执行操作").ToString() + "\r\n"));
             RealAction("CP77Tools/CP77Tools.exe", Arguments);
 
         }
-        private void RealAction(string StartFileName, string StartFileArg,bool UnpackingMode = true)
+        private void RealAction(string StartFileName, string StartFileArg)
         {
             Process CmdProcess = new Process();
             CmdProcess.StartInfo.FileName = StartFileName;      // 命令
             CmdProcess.StartInfo.Arguments = StartFileArg;      // 参数
 
+            if(ShowCMD.IsChecked != true)
             CmdProcess.StartInfo.CreateNoWindow = true;         // 不创建新窗口
             //CmdProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             CmdProcess.StartInfo.UseShellExecute = false;
 
-            if (!UnpackingMode)
+            if (ShowCMD.IsChecked != true)
             {
                 CmdProcess.StartInfo.RedirectStandardInput = true;  // 重定向输入
                 CmdProcess.StartInfo.RedirectStandardOutput = true; // 重定向标准输出
@@ -320,7 +360,7 @@ namespace CP77ToolsGui
             CmdProcess.Exited += new EventHandler(CmdProcess_Exited);   // 注册进程结束事件
 
             CmdProcess.Start();
-            if (!UnpackingMode)
+            if (ShowCMD.IsChecked != true)
             {
                 CmdProcess.BeginOutputReadLine();
                 CmdProcess.BeginErrorReadLine();
@@ -361,7 +401,7 @@ namespace CP77ToolsGui
         {
             Dispatcher.Invoke(new Action(delegate
             {
-                consoleBox.Inlines.Add(new Run(){ Text = "操作完成！ \r\n", Foreground = new SolidColorBrush(Colors.Blue) });
+                consoleBox.Inlines.Add(new Run(){ Text = Application.Current.FindResource("c_操作完成").ToString()+" \r\n", Foreground = new SolidColorBrush(Colors.Blue) });
                 executionLoading.Visibility = Visibility.Hidden;
                 DoRun_Button.IsEnabled = true;
                 DoArchive_Button.IsEnabled = true;
@@ -402,7 +442,7 @@ namespace CP77ToolsGui
             DoUpdateTools_Button.IsEnabled = false;
             DoDump_Button.IsEnabled = false;
             DoPack_Button.IsEnabled = false;
-            consoleBox.Inlines.Add(new Run("获取工具更新信息！ \r\n"));
+            consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_获取更新").ToString() + " \r\n"));
             string url = "https://api.github.com/repos/WolvenKit/CP77Tools/releases";
             string getJson = HttpUitls.Get(url);
             JArray ret = (JArray)JsonConvert.DeserializeObject(getJson);
@@ -420,7 +460,7 @@ namespace CP77ToolsGui
                 {
                     if(File.ReadAllText(ToolsVersionPath) == versionInfo)
                     {
-                        consoleBox.Inlines.Add(new Run(){ Text = "当前已安装最新版本(" + versionInfo + ")，如需重新安装，请删除ToolsVersion文件后重试！ \r\n", Foreground = new SolidColorBrush(Colors.Blue) });
+                        consoleBox.Inlines.Add(new Run(){ Text = Application.Current.FindResource("c_无更新上").ToString() + versionInfo + Application.Current.FindResource("c_无更新下").ToString() + " \r\n", Foreground = new SolidColorBrush(Colors.Blue) });
                         executionLoading.Visibility = Visibility.Hidden;
                         DoRun_Button.IsEnabled = true;
                         DoArchive_Button.IsEnabled = true;
@@ -430,7 +470,7 @@ namespace CP77ToolsGui
                     }
                     else
                     {
-                        consoleBox.Inlines.Add(new Run(downloadUrl + "下载中，请稍后... \r\n"));
+                        consoleBox.Inlines.Add(new Run(downloadUrl + Application.Current.FindResource("c_下载中").ToString() + " \r\n"));
                         using (WebClient client = new WebClient())
                         {
                             client.DownloadFileAsync(new Uri(downloadUrl.Trim()), "CP77Tools.zip");
@@ -442,7 +482,7 @@ namespace CP77ToolsGui
                 }
                 else
                 {
-                    consoleBox.Inlines.Add(new Run(downloadUrl + "下载中，请稍后... \r\n"));
+                    consoleBox.Inlines.Add(new Run(downloadUrl + Application.Current.FindResource("c_下载中").ToString() + " \r\n"));
                     using (WebClient client = new WebClient())
                     {
                         client.DownloadFileAsync(new Uri(downloadUrl.Trim()), "CP77Tools.zip");
@@ -463,25 +503,33 @@ namespace CP77ToolsGui
                 DoPack_Button.IsEnabled = true;
             }
         }
+        private void UpdateTools(object sender, RoutedEventArgs e)
+        {
+            AutoUpdater.Start("http://kit.alcedo.top/AutoUpdater.xml");
+        }
         void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             progress.Inlines.Clear();
-            progress.Inlines.Add(new Run("当前接收到" + e.BytesReceived + "字节，文件大小总共" + e.TotalBytesToReceive + "字节"));
+            progress.Inlines.Add(new Run(Application.Current.FindResource("c_下载进度上").ToString() + e.BytesReceived + Application.Current.FindResource("c_下载进度中").ToString() + e.TotalBytesToReceive + Application.Current.FindResource("c_下载进度下").ToString()));
         }
 
         void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
-                consoleBox.Inlines.Add(new Run("文件下载被取消! \r\n"));
+                consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_下载取消").ToString() + "\r\n"));
                 File.Delete("ToolsVersion");
             }
             else
             {
-                consoleBox.Inlines.Add(new Run("文件下载成功，开始解压。 \r\n"));
+                consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_下载成功").ToString() +  " \r\n"));
                 progress.Inlines.Clear();
                 if (Directory.Exists(Directory.GetCurrentDirectory() + "/CP77Tools"))
                 {
+                    if (File.Exists("CP77Tools/oo2ext_7_win64.dll"))
+                    {
+                        File.Copy("CP77Tools/oo2ext_7_win64.dll", "oo2ext_7_win64.dll", true);
+                    }
                     DelectDir(Directory.GetCurrentDirectory() + "/CP77Tools");
                 }
                 /*
@@ -498,11 +546,19 @@ namespace CP77ToolsGui
                 try
                 {
                     ZipFile.ExtractToDirectory("CP77Tools.zip", "CP77Tools");
-                    consoleBox.Inlines.Add(new Run() { Text = "更新完成。 \r\n", Foreground = new SolidColorBrush(Colors.Blue) });
+                    if (File.Exists("oo2ext_7_win64.dll"))
+                    {
+                        File.Move("oo2ext_7_win64.dll", "CP77Tools/oo2ext_7_win64.dll");
+                    }
+                    consoleBox.Inlines.Add(new Run() { Text = Application.Current.FindResource("c_更新完成").ToString() +  " \r\n", Foreground = new SolidColorBrush(Colors.Blue) });
                 }
                 catch (Exception ex)
                 {
-                    consoleBox.Inlines.Add(new Run() { Text = "更新失败！ \r\n", Foreground = new SolidColorBrush(Colors.Red) });
+                    consoleBox.Inlines.Add(new Run() { Text = Application.Current.FindResource("c_更新失败").ToString() +  " \r\n", Foreground = new SolidColorBrush(Colors.Red) });
+                    if (File.Exists("oo2ext_7_win64.dll"))
+                    {
+                        File.Delete("oo2ext_7_win64.dll");
+                    }
                     File.Delete("ToolsVersion");
                 }
             }
@@ -568,5 +624,9 @@ namespace CP77ToolsGui
             Application.Current.Resources.MergedDictionaries[2] = dict;
         }
 
+        private void OpenSetting(object sender, RoutedEventArgs e)
+        {
+            ToolsSetting.IsOpen = true;
+        }
     }
 }
