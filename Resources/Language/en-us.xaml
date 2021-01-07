@@ -20,6 +20,7 @@
     <system:String x:Key="我的主页">Alcedo</system:String>
     <system:String x:Key="踩蘑菇">Caimogu</system:String>
     <system:String x:Key="更新哈希表">Hash update</system:String>
+    <system:String x:Key="国内更新">Update cp77tools with update address in China</system:String>
     <system:String x:Key="官方UI提示">At present, the UI version has been officially updated. Since the UI version cannot use the command function, if the UI version has been updated and you want to continue to use the software, please delete the ToolsVersion file and download CP77Tools again after the non-UI version</system:String>
     <system:String x:Key="net提示">Make sure you have .NET Runtime 5.0.1 installed.You can find it here: https://dotnet.microsoft.com/download/dotnet/5.0</system:String>
     <system:String x:Key="dll提示">The cp77 tools require the oo2ext_7_win64.dll to work. Copy and paste the dll into the cp77Tools folder.It can be found here:Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll</system:String>

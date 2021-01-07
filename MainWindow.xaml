@@ -16,7 +16,7 @@
         Loaded="MainWindow_OnLoaded"
         Background="#727A7A7A"
         AllowsTransparency="True"
-        WindowStyle="None"
+        WindowStyle="None" ResizeMode="CanMinimize"
     >
     <Grid>
         <Grid.RowDefinitions>
@@ -119,17 +119,22 @@
                         <TextBlock Text="{DynamicResource 设置}" Style="{StaticResource TextBlockLargeBold}" HorizontalAlignment="Left"/>
                         <hc:Row Margin="0,20,0,0">
                             <hc:Col>
-                                <CheckBox x:Name="CreateDirectory" Content="{DynamicResource 创建目录}" IsChecked="True" HorizontalAlignment="Left"/>
+                                <CheckBox x:Name="CreateDirectory" Content="{DynamicResource 创建目录}" IsChecked="True" HorizontalAlignment="Left" Click="Config_checked"/>
                             </hc:Col>
                         </hc:Row>
                         <hc:Row Margin="0,20,0,0">
                             <hc:Col>
-                                <CheckBox x:Name="ParametersOnly" Content="{DynamicResource 仅参数}" IsChecked="False" HorizontalAlignment="Left"/>
+                                <CheckBox x:Name="ParametersOnly" Content="{DynamicResource 仅参数}" IsChecked="False" HorizontalAlignment="Left" Click="Config_checked"/>
                             </hc:Col>
                         </hc:Row>
                         <hc:Row Margin="0,20,0,0">
                             <hc:Col>
-                                <CheckBox x:Name="ShowCMD" Content="{DynamicResource 显示cmd}" IsChecked="False" HorizontalAlignment="Left"/>
+                                <CheckBox x:Name="ShowCMD" Content="{DynamicResource 显示cmd}" IsChecked="False" HorizontalAlignment="Left" Click="Config_checked"/>
+                            </hc:Col>
+                        </hc:Row>
+                        <hc:Row Margin="0,20,0,0">
+                            <hc:Col>
+                                <CheckBox x:Name="StreamingUpdate" Content="{DynamicResource 国内更新}" IsChecked="False" HorizontalAlignment="Left" Click="Config_checked"/>
                             </hc:Col>
                         </hc:Row>
                         <hc:Row Margin="0,20,0,0">

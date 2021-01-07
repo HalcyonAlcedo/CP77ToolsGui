@@ -20,6 +20,7 @@
     <system:String x:Key="我的主页">我的主页</system:String>
     <system:String x:Key="踩蘑菇">踩蘑菇论坛</system:String>
     <system:String x:Key="更新哈希表">更新哈希表</system:String>
+    <system:String x:Key="国内更新">使用国内地址更新CP77Tools</system:String>
     <system:String x:Key="官方UI提示">目前官方已经更新UI版本，由于UI版本无法使用命令符功能，如已更新UI版本且想需继续使用本软件请删除ToolsVersion文件后重新下载非UI版本CP77Tools</system:String>
     <system:String x:Key="net提示">软件需要安装NET5.0，如果你还未安装，可以在 https://dotnet.microsoft.com/download/dotnet/5.0 下载</system:String>
     <system:String x:Key="dll提示">软件所需的oo2ext_7_win64.dll文件可以在Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll中找到</system:String>
