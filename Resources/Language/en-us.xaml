@@ -19,14 +19,26 @@
     <system:String x:Key="执行">Run</system:String>
     <system:String x:Key="我的主页">Alcedo</system:String>
     <system:String x:Key="踩蘑菇">Caimogu</system:String>
+    <system:String x:Key="更新哈希表">Hash update</system:String>
+    <system:String x:Key="官方UI提示">At present, the UI version has been officially updated. Since the UI version cannot use the command function, if the UI version has been updated and you want to continue to use the software, please delete the ToolsVersion file and download CP77Tools again after the non-UI version</system:String>
     <system:String x:Key="net提示">Make sure you have .NET Runtime 5.0.1 installed.You can find it here: https://dotnet.microsoft.com/download/dotnet/5.0</system:String>
     <system:String x:Key="dll提示">The cp77 tools require the oo2ext_7_win64.dll to work. Copy and paste the dll into the cp77Tools folder.It can be found here:Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll</system:String>
     <system:String x:Key="筛选提示">Filter files are filtered in the form of wildcards</system:String>
     <system:String x:Key="qq群">QQ:602068746</system:String>
 
+    <system:String x:Key="s_单文件解包">Unpack selected files</system:String>
+    <system:String x:Key="s_包文件查看器">Package file viewer</system:String>
+
+    <system:String x:Key="v_全部展开">Expand all</system:String>
+    <system:String x:Key="v_全部折叠">Collapse all</system:String>
+    <system:String x:Key="v_全部选中">Select all</system:String>
+    <system:String x:Key="v_全部取消">Cancel all</system:String>
+    <system:String x:Key="v_全部选中子项">Select all children</system:String>
+
     <system:String x:Key="c_发现工具更新">A new version of cp77tools has been found. You can choose to update it.</system:String>
     <system:String x:Key="c_获取更新">Get tool update information!</system:String>
     <system:String x:Key="c_包信息保存目录提示">The extracted package information will be saved in the directory where the package file is located</system:String>
+    <system:String x:Key="c_解包队列提示">Batch unpacking in progress, remaining: </system:String>
     <system:String x:Key="c_开始执行操作">Start the operation, the execution time is long, please do not close the program!</system:String>
     <system:String x:Key="c_操作完成">Operation complete!</system:String>
     <system:String x:Key="c_未找到CP77Tools">Error: cp77tools not found!</system:String>
@@ -42,5 +54,12 @@
     <system:String x:Key="c_下载成功">The file is downloaded successfully. Begin to unzip.</system:String>
     <system:String x:Key="c_更新完成">Update complete.</system:String>
     <system:String x:Key="c_更新失败">Update failed!</system:String>
+
+    <system:String x:Key="c_s_未选择文件">No files have been selected to unpack</system:String>
+    <system:String x:Key="c_s_读取文件上">Read text</system:String>
+    <system:String x:Key="c_s_读取文件下">In, please wait...</system:String>
+    <system:String x:Key="c_s_解包提示上">Please select the file to unpack</system:String>
+    <system:String x:Key="c_s_解包提示中">The unpacked files will be saved in the directory set by the unpacking tool. Please pay attention to the preset settings</system:String>
+    <system:String x:Key="c_s_解包提示下">To select all files in the folder, right-click the folder and select all sub items</system:String>
     
 </ResourceDictionary>

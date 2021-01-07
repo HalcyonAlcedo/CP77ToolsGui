@@ -7,10 +7,22 @@
         xmlns:my="clr-namespace:CP77ToolsGui.Model"
         mc:Ignorable="d"
         Loaded="PacketList_OnLoaded"
-        Title="包文件查看器" Height="450" Width="800">
+        Title="{DynamicResource s_包文件查看器}" Height="450" Width="800">
     <Grid>
-        <local:TreeViewXV x:Name="FileListView" HorizontalAlignment="Left" Height="388" Margin="10,10,0,0" VerticalAlignment="Top" Width="645" />
-        <Button x:Name="retMainWindow" Content="解包选中的文件" HorizontalAlignment="Left" Margin="660,348,0,0" VerticalAlignment="Top" Width="122" Click="Button_Click" Height="50"/>
-        <hc:LoadingCircle x:Name="loading" Margin="697,29,55,350" />
+        <local:TreeViewXV x:Name="FileListView" HorizontalAlignment="Right" Height="388" Margin="0,10,210,0" VerticalAlignment="Top" Width="572" />
+        <Button x:Name="retMainWindow" Content="{DynamicResource s_单文件解包}" HorizontalAlignment="Stretch" Margin="587,348,10,0" VerticalAlignment="Top" Click="Button_Click" Height="50"/>
+        <TextBlock x:Name="Tips" Margin="587,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="307"/>
+
+        <!--提示-->
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" Margin="0,0,-16,0" Width="26" Grid.RowSpan="2">
+            <StackPanel hc:Growl.GrowlParent="True" VerticalAlignment="Top" Margin="0,10,10,10"/>
+        </ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel hc:Growl.Token="InfoMessage" VerticalAlignment="Top" Margin="0,10,10,10" SizeChanged="StackPanel_SizeChanged"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <StackPanel hc:Growl.Token="ErrorMessage" VerticalAlignment="Top" Margin="0,10,10,10" SizeChanged="StackPanel_SizeChanged"/>
+        </ScrollViewer>
+        <hc:LoadingLine x:Name="loading" Margin="660,322,0,77" HorizontalAlignment="Left" Width="122"/>
     </Grid>
 </Window>

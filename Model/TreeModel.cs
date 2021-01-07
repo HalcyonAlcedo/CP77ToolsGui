@@ -37,6 +37,14 @@ namespace CP77ToolsGui.Model
         /// 父项
         /// </summary>
         private TreeModel _parent;
+        /// <summary>
+        /// 类型
+        /// </summary>
+        private string _type;
+        /// <summary>
+        /// 文件路径
+        /// </summary>
+        private string _file;
         #endregion 
 
         /// <summary>
@@ -157,6 +165,23 @@ namespace CP77ToolsGui.Model
         {
             get { return _children; }
             set { _children = value; }
+        }
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        public string Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+        /// <summary>
+        /// 文件路径
+        /// </summary>
+        public string File
+        {
+            get { return _file; }
+            set { _file = value; }
         }
 
         /// <summary>

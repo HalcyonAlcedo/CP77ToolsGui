@@ -19,15 +19,27 @@
     <system:String x:Key="执行">执行</system:String>
     <system:String x:Key="我的主页">我的主页</system:String>
     <system:String x:Key="踩蘑菇">踩蘑菇论坛</system:String>
+    <system:String x:Key="更新哈希表">更新哈希表</system:String>
+    <system:String x:Key="官方UI提示">目前官方已经更新UI版本，由于UI版本无法使用命令符功能，如已更新UI版本且想需继续使用本软件请删除ToolsVersion文件后重新下载非UI版本CP77Tools</system:String>
     <system:String x:Key="net提示">软件需要安装NET5.0，如果你还未安装，可以在 https://dotnet.microsoft.com/download/dotnet/5.0 下载</system:String>
     <system:String x:Key="dll提示">软件所需的oo2ext_7_win64.dll文件可以在Cyberpunk 2077\bin\x64\oo2ext_7_win64.dll中找到</system:String>
     <system:String x:Key="筛选提示">筛选文件使用通配符形式进行筛选</system:String>
     <system:String x:Key="封包提示">封包后的文件存放到Cyberpunk 2077\archive\pc\patch中生效，请确保文件名为basegame_(文件描述).archive</system:String>
     <system:String x:Key="qq群">QQ交流群:602068746</system:String>
 
+    <system:String x:Key="s_单文件解包">解包选中文件</system:String>
+    <system:String x:Key="s_包文件查看器">包文件查看器</system:String>
+
+    <system:String x:Key="v_全部展开">全部展开</system:String>
+    <system:String x:Key="v_全部折叠">全部折叠</system:String>
+    <system:String x:Key="v_全部选中">全部选中</system:String>
+    <system:String x:Key="v_全部取消">全部取消</system:String>
+    <system:String x:Key="v_全部选中子项">全部选中子项</system:String>
+
     <system:String x:Key="c_发现工具更新">发现新版本CP77Tools，可选择更新</system:String>
     <system:String x:Key="c_获取更新">获取工具更新信息！</system:String>
     <system:String x:Key="c_包信息保存目录提示">提取的包信息将保存在包文件所在目录</system:String>
+    <system:String x:Key="c_解包队列提示">正在执行批量解包，目前剩余：</system:String>
     <system:String x:Key="c_开始执行操作">开始执行操作，执行时间较长，请不要关闭程序！</system:String>
     <system:String x:Key="c_操作完成">操作完成！</system:String>
     <system:String x:Key="c_未找到CP77Tools">错误：未找到CP77Tools！</system:String>
@@ -43,5 +55,13 @@
     <system:String x:Key="c_下载成功">文件下载成功，开始解压。</system:String>
     <system:String x:Key="c_更新完成">更新完成。</system:String>
     <system:String x:Key="c_更新失败">更新失败！</system:String>
+
+    <system:String x:Key="c_s_未选择文件">还未选择要解包的文件</system:String>
+    <system:String x:Key="c_s_读取文件上">读取文件</system:String>
+    <system:String x:Key="c_s_读取文件下">中，请稍后...</system:String>
+    <system:String x:Key="c_s_解包提示上">请选择需要解包的文件</system:String>
+    <system:String x:Key="c_s_解包提示中">解包后的文件将保存在解包工具设置的保存目录中，请留意预先设置</system:String>
+    <system:String x:Key="c_s_解包提示下">如需选择文件夹下全部文件，请右击文件夹选择全部选择子项</system:String>
+    
     
 </ResourceDictionary>

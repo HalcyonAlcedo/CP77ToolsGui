@@ -12,22 +12,22 @@
                 <TreeView Name="tvZsmTree">
                     <TreeView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Name="menuExpandAll" Header="全部展开" Click="menuExpandAll_Click">
+                            <MenuItem Name="menuExpandAll" Header="{DynamicResource v_全部展开}" Click="menuExpandAll_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/Com.FMS;component/Images/16_16/folder_open_arrow.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Name="menuUnExpandAll" Header="全部折叠" Click="menuUnExpandAll_Click">
+                            <MenuItem Name="menuUnExpandAll" Header="{DynamicResource v_全部折叠}" Click="menuUnExpandAll_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/Com.FMS;component/Images/16_16/folder_close_arrow.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Name="menuSelectAll" Header="全部选中" Click="menuSelectAll_Click">
+                            <MenuItem Name="menuSelectAll" Header="{DynamicResource v_全部选中}" Click="menuSelectAll_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/Com.FMS;component/Images/16_16/tick.png" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Name="menuUnSelectAll" Header="全部取消" Click="menuUnSelectAll_Click">
+                            <MenuItem Name="menuUnSelectAll" Header="{DynamicResource v_全部取消}" Click="menuUnSelectAll_Click">
                                 <MenuItem.Icon>
                                     <Image Source="/Com.FMS;component/Images/16_16/delete.png" />
                                 </MenuItem.Icon>
@@ -50,7 +50,7 @@
                                     </StackPanel>
                                     <CheckBox.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Name="menuSelectAllChild" Header="全部选中子项" Click="menuSelectAllChild_Click">
+                                            <MenuItem Name="menuSelectAllChild" Header="{DynamicResource v_全部选中子项}" Click="menuSelectAllChild_Click">
                                                 <MenuItem.Icon>
                                                     <Image Source="/Com.FMS;component/Images/16_16/tick.png" />
                                                 </MenuItem.Icon>

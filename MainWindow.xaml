@@ -91,6 +91,9 @@
                     <Run Text="-------------------------------------------------------------------------------------------------------------------------------------------------"/>
                 </Paragraph>
                 <Paragraph NumberSubstitution.CultureSource="User" Foreground="Black">
+                    <Run Text="{DynamicResource 官方UI提示}"/>
+                </Paragraph>
+                <Paragraph NumberSubstitution.CultureSource="User" Foreground="Black">
                     <Run Text="{DynamicResource net提示}"/>
                 </Paragraph>
                 <Paragraph NumberSubstitution.CultureSource="User" Foreground="Black">
@@ -131,6 +134,18 @@
                         </hc:Row>
                         <hc:Row Margin="0,20,0,0">
                             <hc:Col>
+                                <Button Content="{DynamicResource 更新哈希表}" Style="{StaticResource ButtonPrimary}" Click="UpdateHash" Width="100" HorizontalAlignment="Left">
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                            <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
+                                            <GradientStop Color="#CC326CF3" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                            </hc:Col>
+                        </hc:Row>
+                        <hc:Row Margin="0,20,0,0">
+                            <hc:Col>
                                 <Button Content="{DynamicResource 更新程序}" Style="{StaticResource ButtonPrimary}" Click="UpdateTools" Width="100" HorizontalAlignment="Left">
                                     <Button.Background>
                                         <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
@@ -157,6 +172,7 @@
         </ScrollViewer>
         <hc:LoadingLine x:Name="executionLoading" Margin="10,10,10,188" Visibility="Hidden"/>
         <hc:TextBox x:Name="ArgumentsText" hc:TitleElement.TitleWidth="auto" hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{DynamicResource 运行参数}" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,147,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="678" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
+        
         <Button x:Name="DoRun_Button" Content="{DynamicResource 执行}" Margin="701,147,0,0" Style="{StaticResource ButtonPrimary}" Click="ExecuteClick" Width="65" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
