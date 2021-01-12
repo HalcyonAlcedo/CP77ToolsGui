@@ -23,7 +23,7 @@
             <RowDefinition Height="22*"/>
             <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="DoArchive_Button" Content="{DynamicResource 解包}" Margin="32,22,0,0" Style="{StaticResource ButtonPrimary}" Click="ArchiveFile" Width="152" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button x:Name="DoArchive_Button" Content="{DynamicResource 解包}" Margin="32,22,0,0" Style="{StaticResource ButtonPrimary}" Click="ArchiveFile" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -31,7 +31,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="DoPack_Button" Content="{DynamicResource 打包}" Margin="32,67,0,0" Style="{StaticResource ButtonPrimary}" Click="PackFile" Width="152" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button x:Name="DoPack_Button" Content="{DynamicResource 打包}" Margin="32,67,0,0" Style="{StaticResource ButtonPrimary}" Click="PackFile" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -39,7 +39,15 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="DoDump_Button" Content="{DynamicResource 获取包信息}" Margin="205,22,0,0" Style="{StaticResource ButtonPrimary}" Click="DumpFile" Width="90" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button x:Name="DoRebuild_Button" Content="{DynamicResource 重构}" Margin="342,67,0,0" Style="{StaticResource ButtonPrimary}" Click="RebuildFile" Width="101" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                    <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
+                    <GradientStop Color="#CC326CF3" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="DoDump_Button" Content="{DynamicResource 获取包信息}" Margin="173,22,0,0" Style="{StaticResource ButtonPrimary}" Click="DumpFile" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -65,7 +73,7 @@
             </Button.Background>
         </Button>
         <hc:TextBox x:Name="ScreenFile" hc:InfoElement.TitleWidth="auto" hc:InfoElement.TitlePlacement="Left" hc:InfoElement.Title="{DynamicResource 筛选文件}" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,67,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="232" Height="30" VerticalAlignment="Top"/>
-        <Button x:Name="DoUpdateTools_Button" Content="{DynamicResource 更新工具}" Margin="0,67,357,0" Style="{StaticResource ButtonPrimary}" Click="UpdateToolsClick" Width="238" VerticalAlignment="Top" HorizontalAlignment="Right">
+        <Button x:Name="DoUpdateTools_Button" Content="{DynamicResource 更新工具}" Margin="0,67,477,0" Style="{StaticResource ButtonPrimary}" Click="UpdateToolsClick" Width="150" VerticalAlignment="Top" HorizontalAlignment="Right">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
                     <GradientStop Color="{DynamicResource PrimaryColor}" Offset="0"/>
@@ -160,7 +168,7 @@
                                     </Button.Background>
                                 </Button>
                             </hc:Col>
-                        </hc:Row>                        
+                        </hc:Row>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -177,7 +185,7 @@
         </ScrollViewer>
         <hc:LoadingLine x:Name="executionLoading" Margin="10,10,10,188" Visibility="Hidden"/>
         <hc:TextBox x:Name="ArgumentsText" hc:TitleElement.TitleWidth="auto" hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{DynamicResource 运行参数}" Style="{StaticResource TextBoxExtend}" Text="" Margin="0,147,104,0" Background="#99FFFFFF" HorizontalAlignment="Right" Width="678" Height="30" VerticalAlignment="Top" Grid.Row="1"/>
-        
+
         <Button x:Name="DoRun_Button" Content="{DynamicResource 执行}" Margin="701,147,0,0" Style="{StaticResource ButtonPrimary}" Click="ExecuteClick" Width="65" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1">
             <Button.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">

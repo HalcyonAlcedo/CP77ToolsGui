@@ -4,6 +4,7 @@
     <system:String x:Key="语言切换">English</system:String>
     <system:String x:Key="解包">解包</system:String>
     <system:String x:Key="打包">封包</system:String>
+    <system:String x:Key="重构">重构纹理</system:String>
     <system:String x:Key="获取包信息">预览包文件</system:String>
     <system:String x:Key="提取纹理">提取纹理</system:String>
     <system:String x:Key="保存目录">保存目录</system:String>

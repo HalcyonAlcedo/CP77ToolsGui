@@ -4,12 +4,13 @@
     <system:String x:Key="语言切换">中文</system:String>
     <system:String x:Key="解包">Extract</system:String>
     <system:String x:Key="打包">Pack</system:String>
+    <system:String x:Key="重构">Rebuild</system:String>
     <system:String x:Key="获取包信息">Preview</system:String>
     <system:String x:Key="提取纹理">Texture</system:String>
     <system:String x:Key="保存目录">SaveDirectory</system:String>
     <system:String x:Key="选择">Select</system:String>
     <system:String x:Key="筛选文件">Filter</system:String>
-    <system:String x:Key="更新工具">Update/Download CP77Tools</system:String>
+    <system:String x:Key="更新工具">Download CP77Tools</system:String>
     <system:String x:Key="设置">Setting</system:String>
     <system:String x:Key="创建目录">Creating a directory for unpacking files</system:String>
     <system:String x:Key="仅参数">Only build parameters are not executed immediately</system:String>

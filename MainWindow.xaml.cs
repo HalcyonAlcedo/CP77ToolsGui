@@ -206,6 +206,17 @@ namespace CP77ToolsGui
                 DoPack(filepath);
             }
         }
+        private void RebuildFile(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = System.Windows.Forms.Application.StartupPath;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                string filepath = dialog.FileName;
+                DoRebuild(filepath);
+            }
+        }
         private void ExecuteClick(object sender, RoutedEventArgs e)
         {
             consoleBox.Inlines.Clear();
@@ -276,6 +287,16 @@ namespace CP77ToolsGui
                 ArgumentsText.Text = "cr2w -i -o \"" + outFilePath.Text + "\" -p \"" + filepath + "\" ";
             else
                 ArgumentsText.Text = "cr2w -i -p \"" + filepath + "\" ";
+
+            if (ParametersOnly.IsChecked == false)
+            {
+                consoleBox.Inlines.Clear();
+                PerformUnpack(ArgumentsText.Text);
+            }
+        }
+        private void DoRebuild(string filepath)
+        {
+            ArgumentsText.Text = "rebuild -b -t --keep --unsaferaw -p \"" + filepath + "\" ";
 
             if (ParametersOnly.IsChecked == false)
             {
@@ -433,6 +454,7 @@ namespace CP77ToolsGui
             DoUpdateTools_Button.IsEnabled = false;
             DoDump_Button.IsEnabled = false;
             DoPack_Button.IsEnabled = false;
+            DoRebuild_Button.IsEnabled = false;
             string Arguments = StartFileArg;
             consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_开始执行操作").ToString() + "\r\n"));
             RealAction("CP77Tools/CP77Tools.exe", Arguments);
@@ -509,6 +531,7 @@ namespace CP77ToolsGui
                 DoUpdateTools_Button.IsEnabled = true;
                 DoDump_Button.IsEnabled = true;
                 DoPack_Button.IsEnabled = true;
+                DoRebuild_Button.IsEnabled = true;
 
                 PacketQueue();
             }));
@@ -545,6 +568,7 @@ namespace CP77ToolsGui
             DoUpdateTools_Button.IsEnabled = false;
             DoDump_Button.IsEnabled = false;
             DoPack_Button.IsEnabled = false;
+            DoRebuild_Button.IsEnabled = false;
             consoleBox.Inlines.Add(new Run(Application.Current.FindResource("c_获取更新").ToString() + " \r\n"));
             string url = "https://api.github.com/repos/WolvenKit/CP77Tools/releases";
             if(StreamingUpdate.IsChecked==true)
@@ -577,6 +601,7 @@ namespace CP77ToolsGui
                             DoUpdateTools_Button.IsEnabled = true;
                             DoDump_Button.IsEnabled = true;
                             DoPack_Button.IsEnabled = true;
+                            DoRebuild_Button.IsEnabled = true;
                         }
                         else
                         {
@@ -611,6 +636,7 @@ namespace CP77ToolsGui
                     DoUpdateTools_Button.IsEnabled = true;
                     DoDump_Button.IsEnabled = true;
                     DoPack_Button.IsEnabled = true;
+                    DoRebuild_Button.IsEnabled = true;
                 }
                 break;
             }
@@ -681,6 +707,7 @@ namespace CP77ToolsGui
             DoUpdateTools_Button.IsEnabled = true;
             DoDump_Button.IsEnabled = true;
             DoPack_Button.IsEnabled = true;
+            DoRebuild_Button.IsEnabled = true;
         }
         public static void DelectDir(string srcPath)
         {
